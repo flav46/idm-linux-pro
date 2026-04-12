@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>IDM Linux Pro</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #38bdf8;
+    }
+
+    .top-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .download-btn {
+      background: #22c55e;
+      color: white;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: #334155;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: #38bdf8;
+      transition: width 0.3s;
+    }
+
+    .actions {
+      margin-top: 10px;
+    }
+
+    .pause { background: orange; }
+    .resume { background: #3b82f6; }
+  </style>
+</head>
+<body>
+
+<h1>🚀 IDM Linux Pro</h1>
+
+<div class="top-bar">
+  <input id="url" placeholder="Paste download URL here..." />
+  <button class="download-btn" onclick="startDownload()">Download</button>
+</div>
+
+<div id="downloads"></div>
+
+<script>
+const { ipcRenderer } = require('electron');
+
+let counter = 0;
+
+function startDownload() {
+  const url = document.getElementById('url').value;
+  if (!url) return alert("Enter URL");
+
+  const id = "dl_" + counter++;
+  
+  const container = document.createElement("div");
+  container.className = "card";
+  container.id = id;
+
+  container.innerHTML = `
+    <div><b>${url}</b></div>
+    <div id="${id}_text">Starting...</div>
+
+    <div class="progress-bar">
+      <div id="${id}_bar" class="progress"></div>
+    </div>
+
+    <div class="actions">
+      <button class="pause" onclick="pause('${id}')">Pause</button>
+      <button class="resume" onclick="resume('${id}')">Resume</button>
+    </div>
+  `;
+
+  document.getElementById("downloads").appendChild(container);
+
+  ipcRenderer.send("download", id, url);
+}
+
+// UPDATE UI
+ipcRenderer.on("update", (e, data) => {
+  const el = document.getElementById(data.id + "_text");
+  const bar = document.getElementById(data.id + "_bar");
+
+  if (!el) return;
+
+  if (data.progress) {
+    el.innerText = `Progress: ${data.progress}% | Speed: ${data.speed} KB/s`;
+    bar.style.width = data.progress + "%";
+  } else if (data.text) {
+    el.innerText = data.text;
+  }
+});
+
+// DONE
+ipcRenderer.on("done", (e, id) => {
+  const el = document.getElementById(id + "_text");
+  if (el) el.innerText = "✅ Download Complete";
+});
+
+// PAUSE
+function pause(id) {
+  ipcRenderer.send("pause", id);
+}
+
+// RESUME
+function resume(id) {
+  ipcRenderer.send("resume", id);
+}
+</script>
+
+</body>
+</html>

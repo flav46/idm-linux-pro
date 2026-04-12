@@ -1,0 +1,26 @@
+{
+  "name": "idm-linux-pro",
+  "version": "1.0.0",
+  "description": "🚀 Full-featured Internet Download Manager for Linux with Electron, aria2, yt-dlp, browser integration, and real-time UI.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Flavin",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flav46/idm-linux-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flav46/idm-linux-pro/issues"
+  },
+  "homepage": "https://github.com/flav46/idm-linux-pro#readme",
+  "keywords": [],
+  "dependencies": {
+    "axios": "^1.15.0"
+  },
+  "devDependencies": {
+    "electron": "^41.2.0"
+  }
+}
