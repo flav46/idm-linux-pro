@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>IDM Popup</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap');
+
+:root {
+  --primary: #ff0066;
+  --secondary: #ff4d00;
+  --primary-rgb: 255, 0, 102;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: transparent;
+  -webkit-app-region: drag;
+  overflow: hidden;
+}
+
+.popup {
+  width: 360px;
+  background: rgba(8, 8, 12, 0.95);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 24px 80px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.close {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: no-drag;
+}
+
+.close:hover {
+  background: #ff3b3b;
+  color: white;
+}
+
+/* Content */
+.content {
+  padding: 18px;
+}
+
+.filename {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 4px;
+  word-break: break-all;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 14px;
+}
+
+/* Progress */
+.progress-wrap {
+  margin-bottom: 14px;
+}
+
+.progress-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 0.4), transparent);
+  animation: shimmer 1s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.percent {
+  font-size: 22px;
+  font-weight: 600;
+  background: linear-gradient(90deg, #00c864, #00e676);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.percent.done {
+  background: linear-gradient(90deg, #00c864, #00e676);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.speed {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Outfit', monospace;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions button {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Outfit', sans-serif;
+}
+
+.pause-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pause-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.open-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+}
+
+.open-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Done State */
+.done-state {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.done-state.show {
+  display: flex;
+}
+
+.done-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.done-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #00e676;
+  margin-bottom: 4px;
+}
+
+.done-actions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  margin-top: 14px;
+}
+
+/* Pulse animation */
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+</style>
+</head>
+
+<body>
+<div class="popup">
+  <div class="header">
+    <div class="header-left">
+      <div class="icon">⬇</div>
+      <div class="title">IDM Linux Pro</div>
+    </div>
+    <button class="close" onclick="closePopup()">✕</button>
+  </div>
+  
+  <div class="content" id="content">
+    <div class="filename" id="filename">Loading...</div>
+    <div class="meta">
+      <span id="folder">--</span>
+      <span>•</span>
+      <span id="size">--</span>
+    </div>
+    
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+      </div>
+      <div class="progress-info">
+        <div class="percent" id="percent">0%</div>
+        <div class="speed" id="speed">0 KB/s</div>
+      </div>
+    </div>
+    
+    <div class="actions" id="actions">
+      <button class="pause-btn" onclick="pause()">Pause</button>
+      <button class="open-btn" onclick="openFolder()">Open</button>
+    </div>
+  </div>
+  
+  <div class="done-state" id="doneState">
+    <div class="done-icon">✓</div>
+    <div class="done-text">Download Complete!</div>
+    <div class="meta" style="justify-content: center;">
+      <span id="doneFolder">~/Downloads</span>
+    </div>
+    <div class="done-actions">
+      <button class="pause-btn" onclick="closePopup()">Close</button>
+      <button class="open-btn" onclick="openFolder()">Open Folder</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const { ipcRenderer } = require('electron');
+
+let currentId = null;
+let currentFolder = null;
+
+ipcRenderer.on('showDownload', (e, info) => {
+  currentId = info.id;
+  currentFolder = info.folder || '~/Downloads';
+  document.getElementById('filename').textContent = info.url.split('/').pop().split('?')[0] || info.url.substring(0, 40);
+  document.getElementById('folder').textContent = info.folder || '~/Downloads';
+});
+
+ipcRenderer.on('updatePopup', (e, info) => {
+  if (info.id !== currentId) return;
+  
+  document.getElementById('progress').style.width = info.progress + '%';
+  document.getElementById('percent').textContent = info.progress + '%';
+  document.getElementById('speed').textContent = info.speed + ' KB/s';
+  
+  if (info.totalSize) {
+    document.getElementById('size').textContent = info.totalSize;
+  }
+});
+
+ipcRenderer.on('done', (e, id) => {
+  if (id !== currentId) return;
+  
+  document.getElementById('progress').style.width = '100%';
+  document.getElementById('percent').textContent = '✓ Done';
+  document.getElementById('percent').classList.add('done');
+  document.getElementById('speed').textContent = '';
+  
+  document.getElementById('content').style.display = 'none';
+  document.getElementById('doneState').classList.add('show');
+  document.getElementById('doneFolder').textContent = currentFolder;
+});
+
+function pause() {
+  ipcRenderer.send('pause', currentId);
+}
+
+function openFolder() {
+  if (currentFolder) {
+    const { shell } = require('electron');
+    const path = currentFolder.replace('~', require('os').homedir());
+    shell.openPath(path);
+  }
+}
+
+function closePopup() {
+  window.close();
+}
+</script>
+</body>
+</html>

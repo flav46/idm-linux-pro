@@ -4,275 +4,192 @@
   <meta charset="UTF-8">
   <title>IDM Linux Pro</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #ffffff;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      margin: 0;
       padding: 20px;
     }
 
     h1 {
       text-align: center;
-      font-size: 3rem;
-      font-weight: 300;
-      margin-bottom: 30px;
-      background: linear-gradient(45deg, #ffffff, #a8edea);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
-      to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
+      color: #38bdf8;
     }
 
     .top-bar {
       display: flex;
-      gap: 15px;
-      margin-bottom: 30px;
-      backdrop-filter: blur(20px);
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 25px;
-      padding: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      animation: slideIn 0.8s ease-out;
-      flex-wrap: wrap;
-    }
-
-    @keyframes slideIn {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
     input {
       flex: 1;
-      padding: 15px 20px;
+      padding: 10px;
+      border-radius: 6px;
       border: none;
-      border-radius: 20px;
-      font-size: 16px;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-
-    input::placeholder {
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    input:focus {
-      outline: none;
-      background: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-      transform: scale(1.02);
+      font-size: 14px;
     }
 
     button {
-      padding: 15px 25px;
+      padding: 10px 15px;
       border: none;
-      border-radius: 20px;
+      border-radius: 6px;
       cursor: pointer;
-      font-weight: 600;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    button:hover::before {
-      left: 100%;
+      font-weight: bold;
     }
 
     .download-btn {
-      background: linear-gradient(45deg, #22c55e, #16a34a);
+      background: #22c55e;
       color: white;
-      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
-    }
-
-    .download-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
     }
 
     .card {
-      backdrop-filter: blur(20px);
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 20px;
-      border-radius: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      animation: fadeInUp 0.6s ease-out;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      animation: shimmer 2s infinite;
-    }
-
-    @keyframes fadeInUp {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
     }
 
     .progress-bar {
-      height: 12px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 6px;
+      height: 10px;
+      background: #334155;
+      border-radius: 5px;
       overflow: hidden;
-      margin: 15px 0;
-      position: relative;
+      margin-top: 10px;
     }
 
     .progress {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      border-radius: 6px;
-      transition: width 0.5s ease;
-      position: relative;
-    }
-
-    .progress::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      animation: progressShine 2s infinite;
-    }
-
-    @keyframes progressShine {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
+      background: #38bdf8;
+      transition: width 0.3s;
     }
 
     .actions {
-      margin-top: 15px;
-      display: flex;
-      gap: 10px;
+      margin-top: 10px;
     }
 
-    .pause {
-      background: linear-gradient(45deg, #f59e0b, #d97706);
-      color: white;
-    }
-
-    .resume {
-      background: linear-gradient(45deg, #3b82f6, #2563eb);
-      color: white;
-    }
-
-    .pause:hover, .resume:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .status {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 10px;
-    }
-
-    .url {
-      font-weight: 500;
-      margin-bottom: 10px;
-      word-break: break-all;
-    }
-
-    .category {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 10px;
-    }
+    .pause { background: orange; }
+    .resume { background: #3b82f6; }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>🚀 IDM Linux Pro</h1>
 
-    <div class="top-bar">
-      <input id="url" placeholder="Paste download URL here..." />
-      <select id="category" style="padding: 15px 20px; border: none; border-radius: 20px; background: rgba(255, 255, 255, 0.2); color: white; backdrop-filter: blur(10px);">
-        <option value="default">Default</option>
-        <option value="videos">Videos</option>
-        <option value="music">Music</option>
-        <option value="documents">Documents</option>
-      </select>
-      <input id="connections" type="number" placeholder="Connections" value="5" min="1" max="16" style="width: 120px; padding: 15px 20px; border: none; border-radius: 20px; background: rgba(255, 255, 255, 0.2); color: white; backdrop-filter: blur(10px);" />
-      <input id="speedLimit" type="number" placeholder="Speed limit KB/s" min="0" style="width: 150px; padding: 15px 20px; border: none; border-radius: 20px; background: rgba(255, 255, 255, 0.2); color: white; backdrop-filter: blur(10px);" />
-      <button class="download-btn" onclick="startDownload()">Download</button>
-    </div>
+<h1>🚀 IDM Linux Pro</h1>
 
-    <div id="downloads"></div>
-  </div>
+<div class="top-bar">
+  <input id="url" placeholder="Paste download URL here..." />
+  <button class="download-btn" onclick="startDownload()">Download</button>
+</div>
+
+<div id="downloads"></div>
 
 <script>
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, shell } = require('electron');
 
 let counter = 0;
+let activeSection = 'downloads';
+let downloads;
+const icons = { video: '🎬', audio: '🎵', image: '🖼️', document: '📄', archive: '📦', youtube: '▶️', other: '📁' };
+const themeNames = { dark: 'Dark', midnight: 'Midnight', forest: 'Forest', sunset: 'Sunset' };
 
-function startDownload() {
+function navigate(section, el) {
+  activeSection = section;
+  document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+  el.classList.add('active');
+  
+  const header = document.querySelector('.header h1');
+  const desc = document.querySelector('.header p');
+  
+  if (section === 'downloads') {
+    document.getElementById('downloadsSection').style.display = 'grid';
+    document.getElementById('videosSection').style.display = 'none';
+    document.getElementById('audioSection').style.display = 'none';
+    document.getElementById('settingsSection').style.display = 'none';
+    header.textContent = 'Downloads';
+    desc.textContent = 'Manage your downloads and see real-time progress';
+  } else if (section === 'videos') {
+    document.getElementById('downloadsSection').style.display = 'none';
+    document.getElementById('videosSection').style.display = 'grid';
+    document.getElementById('audioSection').style.display = 'none';
+    document.getElementById('settingsSection').style.display = 'none';
+    header.textContent = 'Videos';
+    desc.textContent = 'Manage your Videos from your ~/Videos folder';
+  } else if (section === 'audio') {
+    document.getElementById('downloadsSection').style.display = 'none';
+    document.getElementById('videosSection').style.display = 'none';
+    document.getElementById('audioSection').style.display = 'grid';
+    document.getElementById('settingsSection').style.display = 'none';
+    header.textContent = 'Audio';
+    desc.textContent = 'Manage your Audio from your ~/Music folder';
+  } else if (section === 'files') {
+    document.getElementById('downloadsSection').style.display = 'none';
+    document.getElementById('videosSection').style.display = 'none';
+    document.getElementById('audioSection').style.display = 'none';
+    document.getElementById('filesSection').style.display = 'grid';
+    document.getElementById('settingsSection').style.display = 'none';
+    header.textContent = 'All Files';
+    desc.textContent = 'Manage your downloaded files from ~/Downloads';
+    loadFiles();
+  } else if (section === 'settings') {
+    document.getElementById('downloadsSection').style.display = 'none';
+    document.getElementById('videosSection').style.display = 'none';
+    document.getElementById('audioSection').style.display = 'none';
+    document.getElementById('settingsSection').style.display = 'block';
+    header.textContent = 'Settings';
+    desc.textContent = 'Configure your download preferences';
+  }
+}
+
+function openVideosFolder() {
+  shell.openPath(require('os').homedir() + '/Videos');
+}
+
+function openMusicFolder() {
+  shell.openPath(require('os').homedir() + '/Music');
+}
+
+function openDownloadsFolder() {
+  shell.openPath(require('os').homedir() + '/Downloads');
+}
+
+function formatSize(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + " KB";
+  if (bytes < 1024*1024*1024) return (bytes/(1024*1024)).toFixed(1) + " MB";
+  return (bytes/(1024*1024*1024)).toFixed(2) + " GB";
+}
+
+async function loadFiles() {
+  const files = await window.api.invoke('listFiles', '~/Downloads');
+  const container = document.getElementById('filesSection');
+  container.innerHTML = '';
+  
+  if (files.length === 0) {
+    container.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-icon">📁</div><h3>No files yet</h3><p>Downloads will appear here</p></div>';
+    return;
+  }
+  
+  files.forEach(file => {
+    const div = document.createElement('div');
+    div.className = 'folder-item';
+    const icon = file.isDirectory ? '📁' : '📄';
+    div.innerHTML = `<div class="thumb">${icon}</div><div class="name">${file.name}</div><div class="size">${formatSize(file.size)}</div>`;
+    div.onclick = () => {
+      if (file.isDirectory) {
+        shell.openPath(require('os').homedir() + '/Downloads/' + file.name);
+      } else {
+        shell.openPath(require('os').homedir() + '/Downloads/' + file.name);
+      }
+    };
+    container.appendChild(div);
+  });
+}
+
+function add() {
   const url = document.getElementById('url').value;
-  const category = document.getElementById('category').value;
-  const connections = document.getElementById('connections').value;
-  const speedLimit = document.getElementById('speedLimit').value;
   if (!url) return alert("Enter URL");
 
   const id = "dl_" + counter++;
@@ -282,23 +199,22 @@ function startDownload() {
   container.id = id;
 
   container.innerHTML = `
-    <div class="url">${url}</div>
-    <div class="status" id="${id}_text">Starting download...</div>
-    <div class="category">Category: ${category}</div>
+    <div><b>${url}</b></div>
+    <div id="${id}_text">Starting...</div>
 
     <div class="progress-bar">
       <div id="${id}_bar" class="progress"></div>
     </div>
-
-    <div class="actions">
-      <button class="pause" onclick="pause('${id}')">Pause</button>
-      <button class="resume" onclick="resume('${id}')">Resume</button>
+    <div class="card-actions">
+      <button onclick="pause('${id}')">Pause</button>
+      <button onclick="resume('${id}')">Resume</button>
+      <button onclick="cancel('${id}')">Cancel</button>
     </div>
   `;
 
   document.getElementById("downloads").appendChild(container);
 
-  ipcRenderer.send("download", id, { url, category, connections, speedLimit });
+  ipcRenderer.send("download", id, url);
 }
 
 // UPDATE UI
@@ -320,8 +236,6 @@ ipcRenderer.on("update", (e, data) => {
 ipcRenderer.on("done", (e, id) => {
   const el = document.getElementById(id + "_text");
   if (el) el.innerText = "✅ Download Complete";
-  const bar = document.getElementById(id + "_bar");
-  if (bar) bar.style.width = "100%";
 });
 
 // PAUSE
@@ -334,6 +248,5 @@ function resume(id) {
   ipcRenderer.send("resume", id);
 }
 </script>
-
 </body>
 </html>

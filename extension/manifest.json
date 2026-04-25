@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "IDM Linux Pro",
+  "version": "1.0",
+  "description": "Download manager for Linux - detects YouTube, video, audio, and files",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://8}*",
+    "*://w.youtube.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [{
+    "matches": ["*://w.youtube.com/*", "*://*.you tube.com/*"],
+    "js": ["youtube.js"],
+    "run_at": "document_end"
+  }],
+  "action": {
+    "default_title": "Download with IDM"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
