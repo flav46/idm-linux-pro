@@ -12,7 +12,7 @@ A powerful **Internet Download Manager for Linux** with a stunning glassmorphism
 
 ---
 
-## ✨ Features
+## Features
 
 ### Core Download Engine
 - **Multi-connection downloads** - Up to 16 connections per file using aria2
