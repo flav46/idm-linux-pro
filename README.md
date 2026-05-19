@@ -1,4 +1,4 @@
-# 🚀 IDM Linux Pro
+#  IDM Linux Pro
 
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Linux-blue?style=for-the-badge">
@@ -15,21 +15,21 @@ A powerful **Internet Download Manager for Linux** with a stunning glassmorphism
 ## ✨ Features
 
 ### Core Download Engine
-- ⚡ **Multi-connection downloads** - Up to 16 connections per file using aria2
-- 🎬 **YouTube Downloader** - Download videos with yt-dlp (best quality audio+video)
-- ⏯️ **Full Controls** - Pause, Resume, Cancel any download
-- 📁 **Smart Folders** - Auto-sort by file type
+- **Multi-connection downloads** - Up to 16 connections per file using aria2
+- **YouTube Downloader** - Download videos with yt-dlp (best quality audio+video)
+- **Full Controls** - Pause, Resume, Cancel any download
+- **Smart Folders** - Auto-sort by file type
 
 ### Browser Integration
-- 🌐 **Chrome Extension** - Right-click any link to download
-- 📥 **YouTube Button** - Red download button on YouTube pages
-- 🔗 **Auto-capture** - Sends downloads from browser to app
+- **Chrome Extension** - Right-click any link to download
+- **YouTube Button** - Red download button on YouTube pages
+- **Auto-capture** - Sends downloads from browser to app
 
 ### User Interface
-- 🎨 **Glassmorphism Design** - Modern frosted glass aesthetic
-- 📊 **Real-time Progress** - Live speed graph and stats
-- 🪟 **Frameless Window** - Custom minimize/maximize/close
-- 📱 **Mini Popup** - Shows download progress on mouse position
+- **Glassmorphism Design** - Modern frosted glass aesthetic
+- **Real-time Progress** - Live speed graph and stats
+- **Frameless Window** - Custom minimize/maximize/close
+- **Mini Popup** - Shows download progress on mouse position
 
 ### File Management
 | Type | Extension | Folder |
@@ -42,7 +42,7 @@ A powerful **Internet Download Manager for Linux** with a stunning glassmorphism
 
 ---
 
-## 🖥️ Screenshots
+## Screenshots
 
 ### Main Window
 Clean sidebar layout with glassmorphism cards showing real-time progress, speed, and download controls.
@@ -52,7 +52,7 @@ Appears at mouse position when downloading from extension. Shows filename, progr
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 ```bash
@@ -83,7 +83,7 @@ npm start
 
 ---
 
-## 🔧 Chrome Extension Setup
+## Chrome Extension Setup
 
 1. Open `chrome://extensions`
 2. Enable **Developer mode** (top right toggle)
@@ -97,7 +97,7 @@ npm start
 
 ---
 
-## 🎮 Usage
+##  Usage
 
 ### Adding Downloads
 1. Paste URL in the input field
@@ -112,7 +112,7 @@ npm start
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 idm-linux-pro/
@@ -129,7 +129,7 @@ idm-linux-pro/
 
 ---
 
-## 🔍 Troubleshooting
+## Troubleshooting
 
 ### aria2 not starting?
 ```bash
@@ -157,16 +157,16 @@ lsof -ti:3000 | xargs kill -9
 
 ---
 
-## 📄 License
+## License
 
 MIT License - Feel free to use and modify!
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Pull requests are welcome! Create an issue first for major changes.
 
 ---
 
-**Made with ❤️ for Linux users**
+**Made with for Linux users**
